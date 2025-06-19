@@ -10,4 +10,4 @@ while ! docker info >/dev/null 2>&1; do
 done
 
 # Start an interactive shell attached to the Console.
-exec bash --login
+/bin/bash
