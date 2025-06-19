@@ -19,5 +19,9 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
     apt-get update && \
     apt-get install -y docker-ce docker-ce-cli containerd.io
 
+# Add entrypoint script
+COPY dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh
+RUN chmod +x /usr/local/bin/dockerd-entrypoint.sh
+
 # Start Docker daemon and keep container running
 CMD ["dockerd-entrypoint.sh"]
