@@ -23,5 +23,8 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 COPY dockerd-entrypoint.sh /usr/local/bin/dockerd-entrypoint.sh
 RUN chmod +x /usr/local/bin/dockerd-entrypoint.sh
 
+# Ensure container runs as root
+USER root
+
 # Start Docker daemon and keep container running
 CMD ["dockerd-entrypoint.sh"]
