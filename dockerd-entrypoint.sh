@@ -1,11 +1,13 @@
 #!/bin/bash
-# Start Docker daemon in the background
-dockerd &
+set -e
 
-# Wait for Docker to be available
-until docker info 2>/dev/null; do
-  sleep 1
+# Start Docker daemon in the background as root
+dockerd > /var/log/dockerd.log 2>&1 &
+
+# Wait for Docker daemon to be ready
+while ! docker info >/dev/null 2>&1; do
+    sleep 1
 done
 
-# Drop to a bash shell or run any other startup command
-exec bash
+# Start an interactive shell attached to the Console.
+exec bash --login
